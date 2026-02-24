@@ -1,0 +1,14 @@
+#error-page #error-number {
+    color: #2260AC;
+    color: var(--fs-main);
+    font-weight: bold;
+    font-size: 10rem;
+    line-height: 10rem;
+    opacity: 0.065;
+}
+#error-page ul {
+    list-style: none;
+}
+#error-page ul li {
+    padding: 0.25rem;
+}

@@ -1,0 +1,47 @@
+:root {
+    --fs-dark: #343434;
+    --fs-medium: #DAE3EE;
+    --fs-light: #FFFFFF;
+    --fs-red: #D2232A;
+    --fs-green: #20B775;
+    --fs-blue: #2260AC;
+    --fs-yellow: #FBD240;
+    --fs-main: var(--fs-blue);
+    --fs-secondary: var(--fs-yellow);
+    --fs-headings: #335578;
+    --fs-headings-secondary: #336C8A;
+    --fs-text-color: #336C8A;
+    --fs-background: var(--fs-light);
+    --fs-dark-text: var(--fs-dark);
+    --fs-medium-text: var(--fs-medium);
+    --fs-light-text: var(--fs-light);
+    --fs-footer-main: #214FAD;
+    --fs-footer-secondary: #6E8CCA;
+    --fs-footer-text: var(--fs-light-text);
+    --fs-banner-background:  #FAFAFA;
+    --fs-banner-text: var(--fs-dark-text);
+    --fs-primary: var(--fs-blue);
+    --fs-primary-text: var(--fs-light-text);
+    --fs-danger: var(--fs-red);
+    --fs-danger-text: var(--fs-light-text);
+    --fs-warning: var(--fs-yellow);
+    --fs-warning-text: var(--fs-dark-text);
+    --fs-btn-light: var(--fs-light-text);
+    --fs-btn-light-text: var(--fs-main);
+    --fs-btn-secondary: var(--fs-main);
+    --fs-btn-secondary-text: var(--fs-light-text);
+    --fs-btn-hover-darken: rgba(0, 0, 0, 0.1);
+    --fs-btn-hover-lighten: rgba(255, 255, 255, 0.1);
+    --fs-listing-border: #EFEFEF;
+    --fs-listing-shadow: rgba(0,0,0,.075);
+    --fs-listing-hover: rgba(242, 242, 242, 0.76);
+    --fs-listing-hover-border: #EFEFEF;
+    --fs-listing-hover-shadow: rgba(0,0,0,.075);
+    --fs-paging-text: var(--fs-light-text);
+    --fs-paging-main: var(--fs-main);
+    --fs-message-sent-background: var(--fs-secondary);
+    --fs-message-received-background: #E8E8E8;
+    --fs-hp-dropdown-color: #414141;
+    --fs-hp-dropdown-background: #D8D8D8;
+
+}

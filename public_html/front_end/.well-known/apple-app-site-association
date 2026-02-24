@@ -1,0 +1,13 @@
+{
+  "applinks": {
+      "details": [
+      {
+        "appID": "AJ36834DKZ.nz.co.freestuff",
+        "paths": ["/r/v/*", "/r/l/*", "/test_screen", "/user_verify/email_process/*"]
+      }
+    ]
+  },
+  "webcredentials": {
+     "apps": [ "AJ36834DKZ.nz.co.freestuff" ]
+  }
+}

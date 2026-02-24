@@ -1,0 +1,42 @@
+#paging .page-filter {
+    text-align: center;
+    margin: 4px 0 0 0;
+}
+
+#paging .page-link {
+    color: var(--fs-paging-main);
+}
+
+#paging .page-item.active .page-link {
+    background-color: var(--fs-paging-main);
+    color: var(--fs-paging-text) !important;
+    border: 1px solid var(--fs-paging-main);
+}
+
+#paging .page-item.disabled .page-link {
+    color: #6c757d;
+}
+
+#paging .ellipsis {
+    background: none;
+    vertical-align: bottom;
+    color: var(--fs-medium);
+    cursor: default;
+}
+
+#paging nav .pagination {
+    margin-bottom: 0;
+}
+
+@media all and (max-width: 768px) {
+    /* img = 320px;, min-paging = 338px*/
+    #paging .paging-container {
+        width: 338px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    #paging nav {
+        display: inline-block;
+    }
+}

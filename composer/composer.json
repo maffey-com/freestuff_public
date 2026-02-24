@@ -1,0 +1,6 @@
+{
+    "name": "freestuff/composer",
+    "require": {
+        "google/auth": "^1.37"
+    }
+}

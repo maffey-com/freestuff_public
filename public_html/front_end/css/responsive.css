@@ -1,0 +1,113 @@
+/***********************************************************************************************************************
+ * SCREEN SIZE OR LARGER
+ */
+/*
+ * Extra small devices (portrait phones, less than 576px)
+ * No media query since this is the default in Bootstrap
+ */
+
+/*
+ * Small devices (landscape phones, 576px and up)
+ */
+@media (min-width: 576px) {}
+
+/*
+ * Medium devices (tablets, 768px and up)
+ */
+@media (min-width: 768px) {
+}
+
+/*
+ * Large devices (desktops, 992px and up)
+ */
+@media (min-width: 992px) {}
+
+/*
+ * Extra large devices (large desktops, 1200px and up)
+ */
+@media (min-width: 1200px) {}
+
+
+/***********************************************************************************************************************
+ * SCREEN SIZE OR SMALLER
+ */
+
+/*
+ * Extra small devices (portrait phones, less than 576px)
+ */
+@media (max-width: 575.98px) {
+    /*html,body{font-size: 10px;}
+    #header .row {width: auto;}*/
+}
+/*
+ * Small devices (landscape phones, less than 768px)
+ */
+@media (max-width: 767.98px) {
+    /*html,body{font-size: 12px;}
+    #header {height: auto;}
+    #header .row {position: relative;top:0;transform: none;}
+    #header #header-container-buttons .btn {width: 100%;}
+    /*#footer {margin-top: 1.5em;}*/
+}
+
+/*
+ * Medium devices (tablets, less than 992px)
+ */
+@media (max-width: 991.98px) {
+    /*html,body{font-size: 14px;}*/
+    /*#header .row {padding-bottom: 10px;margin:0;}*/
+    /*#header #header-container-buttons .btn:not(.dropdown-toggle) {margin-left:0px;}*/
+}
+
+@media (max-width: 1014.98px) {
+    /*#header #header-container-buttons .btn {font-size: 0.7rem;}*/
+}
+
+/*
+ * Large devices (desktops, less than 1200px)
+ */
+@media (max-width: 1199.98px) {
+    /*html,body{font-size: 14px;}*/
+    /*#header #header-container-buttons .btn {font-size: 0.85rem;}
+    #hiw-banner #hiw-banner-content h1 {font-size: 2rem;}*/
+}
+
+@media (max-width: 1299.98px) {
+    /*#upper-footer #upper-footer-content h5 {font-size: 1.9rem;font-weight: bold;}*/
+    /*#header #header-container-buttons .btn {font-size: 0.9rem;}
+    #hiw-banner:before {background-position: right;}
+    #hiw-banner:after {background-position: left;}*/
+}
+
+/*
+ * Extra large devices (large desktops)
+ * No media query since the extra-large breakpoint has no upper bound on its width
+ */
+
+/***********************************************************************************************************************
+ * SPECIFIC DEVICES SIZES
+ */
+/*
+ * Extra small devices (portrait phones, less than 576px)
+ */
+@media (max-width: 575.98px) {}
+
+/*
+ * Small devices (landscape phones, 576px and up)
+ */
+@media (min-width: 576px) and (max-width: 767.98px) {}
+
+/*
+ * Medium devices (tablets, 768px and up)
+ */
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+/*
+ * Large devices (desktops, 992px and up)
+ */
+@media (min-width: 992px) and (max-width: 1199.98px) {}
+
+/*
+ * Extra large devices (large desktops, 1200px and up)
+ */
+@media (min-width: 1200px) {}

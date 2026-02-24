@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="Freestuff dev" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
+    <serverData>
+      <paths name="Freestuff LIVE">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/composer/vendor/autoload.php" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Freestuff dev">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/composer/vendor" />
+            <excludedPath local="true" path="$PROJECT_DIR$/composer/composer.lock" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

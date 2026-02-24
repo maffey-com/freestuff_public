@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4a9a6de3-0c9b-4442-8b48-a88b30fc6c53" name="Freestuff LIVE" url="https://freestuff.co.nz">
+        <fileTransfer rootFolder="/home/freestuff/project" accessType="SFTP" host="freestuff.co.nz" port="22" sshConfigId="2c703e30-d56d-4aec-9cf0-2ff585a4786c" sshConfig="freestuff@freestuff.co.nz:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="c9718539-31bc-4283-8fb5-41097634d647" name="Freestuff dev">
+        <fileTransfer rootFolder="/home/freestuff" accessType="SFTP" host="freestuff.dev22.maffey.com" port="22" sshConfigId="b68e0698-e209-4fc8-8fd7-19294ca84fef" sshConfig="freestuff dev">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

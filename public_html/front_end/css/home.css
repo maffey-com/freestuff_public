@@ -1,0 +1,81 @@
+#home-banner {
+    padding: 2rem 0;
+    position: relative;
+    background-color: #FAFAFA;
+    background-color: var(--fs-banner-background);
+    margin-bottom: 1rem;
+}
+
+#home-banner #home-banner-content {
+    text-align: center;
+}
+#home-banner #home-banner-row>div {
+    z-index: 2;
+}
+#home-banner #banner-inner-row {
+    position:relative;
+}
+
+#home-regions {
+    margin-bottom: 1rem !important;
+}
+
+#home-listings .adsbygoogle.responsive {
+    max-height: 96%;
+}
+
+@media all and (min-width: 1190px) {
+    #home-banner #home-banner-row:before{
+        content:'';
+        background:url('../img/hero-left.png');
+        height:100%;
+        display:block;
+        position:absolute;
+        left:15px;
+        width:50vw;
+        background-size:auto 100%;
+        background-position:left;
+        background-repeat:no-repeat;
+        bottom:0;
+    }
+    #home-banner #home-banner-row:after{
+        content:'';
+        background:url('../img/hero-right.png');
+        height:100%;
+        display:block;
+        position:absolute;
+        right:0;
+        z-index:1;
+        width:50vw;
+        background-size:auto 100%;
+        background-position:right;
+        background-repeat:no-repeat;
+        bottom:0;
+    }
+}
+
+.home-dropdown {
+    margin-left: .75em;
+}
+
+#browseListingsMobile {
+    background-color: transparent;
+}
+
+@media all and (max-width: 768px) {
+    #home-regions .header-browse {
+        display: block;
+        margin-left: 0 !important;
+    }
+
+    #home-regions .home-dropdown {
+        margin-top: .75em;
+        margin-left: 0;
+        width: 100%;
+        display: block;
+    }
+
+    #home-regions .dropdown-menu {
+        width: 100%;
+    }
+}

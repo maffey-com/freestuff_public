@@ -1,0 +1,33 @@
+services:
+  php:
+    container_name: freestuff-php
+    volumes:
+      - ./:/home/freestuff
+      - ./docker/apache-virtual-host.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./docker/php-fpm.conf:/etc/php/8.3/fpm/pool.d/www.conf
+      - ./docker/php-config.ini:/etc/php/8.3/fpm/conf.d/addons.ini
+    build:
+        context: .
+        dockerfile: ./docker/Dockerfile
+    ports:
+      - "8087:80"
+    environment:
+      - TZ=pacific/Auckland
+      - SERVER_ENVIRONMENT="DOCKER"
+  mailhog:
+    container_name: freestuff-mailhog
+    image: jcalonso/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+  mysql:
+    container_name: freestuff-mysql
+    image: mysql:8.0
+    volumes:
+      - ./storage/mysql:/var/lib/mysql
+      - ./docker/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/freestuff.sql:/tmp/freestuff.sql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: thing1

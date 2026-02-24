@@ -1,0 +1,9 @@
+/composer/vendor/*
+.vscode/*
+/private/freestuff-firebase-service-account.json
+.idea/freestuff.iml
+/composer.lock
+/composer/vendor/
+/composer/composer.lock
+/storage/*
+/public_html/cache/

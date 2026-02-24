@@ -1,0 +1,117 @@
+#footer-banner_images {
+    margin-top: 4rem;
+    height: 14vw;
+    max-height: 320px;
+    background: #FBD240;
+    background: var(--fs-secondary);
+}
+#footer-banner_images #action-content {
+    position:relative;
+    text-align: center;
+    color: var(--fs-headings);
+}
+#footer-banner_images #upper-footer-content {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+#footer-banner_images #upper-footer-content h5 {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+#footer-banner_images .html-footer_bg_img {
+    background-size: cover;
+    background-position: center;
+    height: 14vw;
+    width:16.66vw;
+    max-width: 320px;
+    max-height: 320px;
+}
+#footer-banner_images #img-1 {
+    background-image: url('../img/lemon.jpg');
+}
+#footer-banner_images #img-2 {
+    background-image: url('../img/bikes.jpg');
+}
+#footer-banner_images #img-3 {
+    background-image: url('../img/couch.jpg');
+}
+#footer-banner_images #img-4 {
+    background-image: url('../img/tv.jpg');
+}
+
+#footer {
+    padding: 3rem 0;
+    background: #214FAD;
+    color: #FFFFFF;
+    background: var(--fs-footer-main);
+    color: var(--fs-footer-text);
+    font-size: 0.9rem;
+}
+
+#footer h6 {
+    font-size: 1.37rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--fs-footer-text);
+}
+
+#footer .list-group .list-group-item{
+    padding: .5rem 0;
+    background-color: transparent;
+    border: 0;
+    border-top: 1px solid var(--fs-footer-secondary);
+    border-bottom: 1px solid var(--fs-footer-secondary);
+    border-radius: 0;
+}
+
+#footer .list-group .list-group-item a{
+    color: #fff;
+}
+
+#footer-sitemap_container,
+#footer-site_stats_container,
+#footer-recycle_container {
+    max-width: 230px;
+    margin-bottom: 5rem !important;
+}
+
+#footer-site_stats_container {
+    margin: 0 auto;
+}
+
+#footer-recycle_container {
+    margin-left: auto;
+}
+
+#footer-copyright {
+    text-align: center;
+    font-weight: bold;
+}
+
+#footer-copyright p {
+    margin-bottom: 0;
+}
+
+#footer-copyright a {
+    color: #FFFFFF;
+    color: var(--fs-footer-text);
+}
+
+@media all and (max-width: 1350px) {
+    #footer-banner_images #upper-footer-content h5 {
+        display: none !important;
+    }
+}
+
+@media all and (max-width: 768px) {
+    #footer-sitemap_container,
+    #footer-site_stats_container,
+    #footer-recycle_container {
+        margin: 0 auto;
+        margin-bottom: 3rem !important;
+    }
+
+    #footer {
+        margin-top: 4rem;
+    }
+}

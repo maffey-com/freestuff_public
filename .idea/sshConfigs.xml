@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="freestuff.co.nz" id="2c703e30-d56d-4aec-9cf0-2ff585a4786c" port="22" nameFormat="DESCRIPTIVE" username="freestuff" useOpenSSHConfig="true" />
+      <sshConfig authType="PASSWORD" host="freestuff.dev22.maffey.com" id="b68e0698-e209-4fc8-8fd7-19294ca84fef" port="22" customName="freestuff dev" nameFormat="CUSTOM" username="freestuff" useOpenSSHConfig="true">
+        <option name="customName" value="freestuff dev" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

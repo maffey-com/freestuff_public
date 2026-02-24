@@ -1,0 +1,27 @@
+
+/*
+ * DASHBOARD PAGE
+ */
+#dashboard-page-details .my-details > .row {
+    margin-bottom: 1em;
+}
+
+#dashboard-page-details .my-details .row.no-gutters {
+    padding:0;
+}
+#dashboard-page-details .my-details-label {
+    font-weight: bold;
+    display: inline-block;
+    width: 150px;
+}
+#dashboard-page-details .my-details-edit {
+    font-size: 0.75em;
+    margin-left: 150px;
+}
+#dashboard-page .no-listings {
+    padding-bottom: 20px;
+}
+#dashboard-listings .btn-view_more {
+    text-align: center;
+    margin-bottom: 0;
+}

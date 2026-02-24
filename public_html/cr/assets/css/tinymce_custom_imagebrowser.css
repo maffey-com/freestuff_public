@@ -1,0 +1,39 @@
+.imagebrowser-image {
+    height: 90px;
+    width: 90px;
+    position: relative;
+    
+    margin: 4px;
+    padding:0;
+    
+    border: 1px solid #AAAAAA;
+    cursor: pointer;
+    display: inline-block;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+.imagebrowser-image img {
+    max-height: 77px;
+    max-width: 90px;
+    vertical-align: middle;
+}
+
+.imagebrowser-image label {
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    
+    padding: 3px;
+    position: absolute;
+    width: 84px;
+    border: none;
+    float: none;
+    height:15px;
+    background-color:#333;
+    
+    text-align: center;
+    color:#fff;
+    font-size: 11px;
+}

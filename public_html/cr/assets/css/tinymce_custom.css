@@ -1,0 +1,80 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+}
+			
+.r0 {
+	background-color:#FAFAFA;
+}
+	
+.popup_panel, .popup_body {
+	padding: 5px 15px;
+}
+
+
+
+/*** MESSAGES **/ 
+.site_messages {
+	padding: 5px 10px;
+	font-family:'Courier New', Courier, monospace;
+	font-size: 12px;	
+	margin: 5px 0;
+	}
+	
+.messages_success {
+	background-color: #aacc77;
+	color:#224400;
+}
+	
+.messages_error {
+	background-color: #ffddee;
+	color:#f00;
+}
+
+
+		
+/*** TOP **/ 
+.popup_panel {
+	background-image: linear-gradient(to bottom, #FDFDFD, #DDDDDD);
+}
+			
+.popup_panel button {
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 4px 10px;
+    text-align: center;
+    opacity: 0.65;
+    background-color: #006DCC;
+    border-radius: 3px;
+    border: 0;
+    display: inline-block;
+}
+
+
+	
+/*** MAIN **/ 
+.popup_body {
+	height: 545px;
+}
+	
+.popup_body table, .popup_body table th, .popup_body table td {
+	border-collapse:collapse;
+	border: 1px solid #DDDDDD; 
+}
+	
+.popup_body table {
+	width: 100%;
+}
+
+.popup_body table th, .popup_body table td {
+	text-align:left;
+	padding: 3px;
+}
+
+.popup_body table th {
+	font-weight: bold;
+	background-image: linear-gradient(to bottom, #FDFDFD, #DDDDDD);
+	background-repeat: repeat-x;
+}

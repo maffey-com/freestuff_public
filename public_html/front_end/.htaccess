@@ -1,0 +1,54 @@
+<Files */controllers/*>
+    deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    #seo stuff
+    #Removes access to the system folder by users.
+    #Additionally this will allow you to create a System.php controller,
+    #previously this would not have been possible.
+    #'system' can be replaced if you have renamed your system folder.
+    #RewriteCond %{REQUEST_URI} ^system.*
+    #RewriteRule ^(.*)$ index.php?/$1 [L]
+
+
+
+
+    #RewriteCond %{HTTP_HOST} maffey.com
+    #RewriteRule ^(.*)-browse$ http://office.maffey.com:30080/freestuff_2018/browse/by-region/$1 [R=301,L]
+
+    RewriteRule ^(.*)-browse$ https://www.freestuff.co.nz/browse/by-region/$1 [R=301,L,B]
+
+    # redirect non-www to www
+
+    RewriteRule ^(.*)-listing(.*)$ view?listing_id=$2&supplied_url=$1 [L,QSA]
+
+    RewriteRule ^(.*)page-not-found$ 404.php [L,QSA]
+
+    RewriteRule ^js-include/(.*).js$ views/$1.js
+
+    # handles password manager change password requests
+    RewriteRule ^\.well-known/change-password$ /account/edit_password [R=301,L]
+
+#http://office.maffey.com:20080/freestuff/Auckland-browse
+#http://office.maffey.com:20080/freestuff/Bay of Plenty-browse
+
+    #Checks to see if the user is attempting to access a valid file,
+    #such as an image or css document, if this isn't true it sends the
+    #request to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !^/404.php
+
+    RewriteRule ^(.*)$ frontdoor.php?_cap=$1 [L,QSA,B]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    # If we don't have mod_rewrite installed, all 404's
+    # can be sent to index.php, and everything works as normal.
+    # Submitted by: ElliotHaughin
+    ErrorDocument 404 /index.php
+</IfModule>
+
