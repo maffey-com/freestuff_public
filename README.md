@@ -1,6 +1,6 @@
 # Clone
 ```
-git clone git@github.com:maffey-com/freestuff_public.git
+git clone https://github.com/maffey-com/freestuff_public.git
 ```
 
 # PHP Composer
@@ -34,6 +34,7 @@ docker exec -i freestuff-mysql sh -c 'mysql -uroot -pthing1 < /tmp/freestuff.sql
 ```
 Create a temporary listing ids file
 ```
+mkdir ./storage/site_files
 echo 1 > ./storage/site_files/temporary_listing_ids.txt
 ```
 
