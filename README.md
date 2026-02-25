@@ -1,6 +1,6 @@
 # Clone
 ```
-git clone git@github.com:maffey-com/freestuff.git
+git clone git@github.com:maffey-com/freestuff_public.git
 ```
 
 # PHP Composer
@@ -10,6 +10,8 @@ composer install
 ```
 
 # Docker
+
+You need to have docker installed locally.
 
 ## Build
 ```
