@@ -233,6 +233,21 @@ class ListController extends _Controller {
         }
     }
 
+    public function markAsNoLongerWanted($listing_id) {
+        $listing_id = (int)$listing_id;
+
+        $listing = Listing::instanceFromId($listing_id);
+
+        if (self::_canIDoStuffToThisListing($listing, FALSE)) {
+            $listing->markAsGone();
+
+            MessageHelper::setSessionSuccessMessage("Your listing has been marked as no longer wanted.");
+            redirect(APP_URL . 'my_freestuff');
+        } else {
+            MessageHelper::setSessionErrorMessage("You do not have permission to mark this listing as no longer wanted.");
+        }
+    }
+
     // Mark as taken delist the item and open a modal to add a feedback to the user who took it
     public function markAsGoneModal($listing_id) {
         if (SecurityHelper::isLoggedIn()) {
