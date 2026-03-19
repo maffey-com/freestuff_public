@@ -185,12 +185,13 @@ class Listing extends CRModel {
     public function updateFrontEnd() {
         $fh = new FileHelper('temporary_listing_image', "temp_" . $this->temp_id);
         $has_image = $fh->getFileNameFromTag("most_recent_upload");
+        $current_has_image = $has_image ? "y" : ($this->has_image ? "y" : "n");
 
         if ($this->validate()) {
             $sql = "UPDATE listing SET ";
             $sql .= " title = " . quoteSQL($this->title);
             $sql .= " ,description = " . quoteSQL($this->description);
-            $sql .= " ,has_image = " . quoteSQL(($has_image ? "y" : "n"));
+            $sql .= " ,has_image = " . quoteSQL($current_has_image);
             $sql .= ", last_updated = NOW()";
             $sql .= " ,listing_type = " . quoteSQL($this->listing_type);
             $sql .= " ,district_id = " . quoteSQL($this->district_id);

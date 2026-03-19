@@ -59,11 +59,14 @@ class ListController extends _Controller {
         self::loginRequiredAndEchoJsonError();
 
         $listing = new Listing();
+        $listing->listing_id = (int)paramFromPost('listing_id');
+
+        // retrieve first so has_image is preserved, buildFromPost overwrites the rest
+        $listing->retrieveFromID($listing->listing_id);
         $listing->buildFromPost();
-        $listing->listing_id = (int)$listing->listing_id;
-
+        
         $is_edit = (!empty($listing->listing_id));
-
+        
         if ($is_edit) {
             if ($listing->updateFrontEnd()) {
                 if (isset($_POST["image_data"])) {
