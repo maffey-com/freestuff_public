@@ -21,7 +21,7 @@ class SearchController extends _Controller {
         $listing_filter = new FilterHelper('listings');
         $listing_filter->setDefault('listing_type','free');
 
-        $sql = "SELECT *, 0 crow_flies_dist 
+        $sql = "SELECT l.*, u.firstname, 0 crow_flies_dist 
                 FROM listing l 
                 JOIN user u ON l.user_id = u.user_id 
                 WHERE l.listing_status IN ('available','reserved')";
