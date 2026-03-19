@@ -24,6 +24,8 @@ if(get_cfg_var('server_environment') == 'DOCKER'){
 
 
     define("MESSAGING_DISABLED", true);
+    define("RECAPTCHA_SITE_KEY", "test");
+    define("RECAPTCHA_SECRET_KEY", "test");
 } else {
     define("DBHOST", "localhost");
     define("DBNAME", "freestuff");
