@@ -11,10 +11,26 @@ function setNewStatus(elem) {
   }
 }
 
+function toggleNoShow(elem) {
+  document.location =
+    "list/toggleNoShow/" +
+    elem.data("listing_id") +
+    "/" +
+    elem.data("request_id");
+}
+
 $(function () {
   $(".status-btn").click(function (e) {
     e.preventDefault();
 
     setNewStatus($(this));
+  });
+});
+
+$(function () {
+  $(".no-show-btn").click(function (e) {
+    e.preventDefault();
+
+    toggleNoShow($(this));
   });
 });

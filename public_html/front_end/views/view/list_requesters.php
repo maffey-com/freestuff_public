@@ -31,6 +31,7 @@ $requests = ListingRequest::getRequestsForListing($listing->listing_id);
             $my_conversations = runQueryGetAll($sql_conversation);
 
             $my_thumbs = Thumb::getThumbsGiven(ArrayHelper::getColumn($my_conversations, "other_user_id"));
+            $show_no_show = true;
             require('views/message/_common_conversations.php');
             ?>
         </div>

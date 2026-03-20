@@ -336,4 +336,19 @@ class ListController extends _Controller {
         echo json_encode($output);
         die();
     }
+
+    public function toggleNoShow($listing_id, $request_id) {
+        $listing_id = (int)$listing_id;
+        $request_id = (int)$request_id;
+        
+        $listing = Listing::instanceFromId($listing_id);
+        $request = new ListingRequest();
+        $request->retrieveFromID($request_id);
+
+        if (self::_canIDoStuffToThisListing($listing)) {
+            $request->toggleNoShow();
+        }
+
+        redirect(APP_URL . seoFriendlyURLs($listing->listing_id, 'listing', false, $listing->title));
+    }
 }

@@ -49,7 +49,7 @@ class ListingRequest extends CRModel {
     public function retrieveFromID($request_id) {
         $request_id = (int)$request_id;
 
-        $sql = "SELECT request_id, listing_id, request_timestamp, user_id, user_firstname,  user_ip_address, district_id
+        $sql = "SELECT *
 				FROM listing_request 
 				WHERE request_id = " . quoteSQL($request_id);
         $row = runQueryGetFirstRow($sql);
@@ -229,7 +229,7 @@ class ListingRequest extends CRModel {
         }
 
         $sql = "SELECT l.listing_id,l.title, l.user_id lister_user_id, l.title listing_title,
-                r.request_timestamp, l.listing_status, 
+                r.request_timestamp, l.listing_status, r.request_id, r.no_show,
                 IF(l.user_id = " . quoteSQL($my_user_id) . ", 'y', 'n') is_lister,
                 IF(r.user_id = " . quoteSQL($my_user_id) . ", l.user_id, r.user_id) other_user_id
                 FROM listing l 
@@ -270,4 +270,12 @@ class ListingRequest extends CRModel {
 
         return $output;
     }
+
+    public function toggleNoShow() {
+    $sql = "UPDATE listing_request
+    SET no_show = IF(no_show = 'y', 'n', 'y')
+    WHERE request_id = " . quoteSQL($this->request_id);
+
+    return runQuery($sql);
+}
 }
