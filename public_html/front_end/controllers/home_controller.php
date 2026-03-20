@@ -7,7 +7,7 @@ class HomeController extends _Controller {
                 WHERE  listing_status = 'available' AND has_image = 'y' AND listing_type = 'free' 
                 ORDER BY rand() LIMIT 30";
         $random_approved_items = runQueryGetAll($sql);
-
+        $top_givers = Listing::getTopGivers();
 
         TemplateHandler::setSelectedMainTab("home");
 

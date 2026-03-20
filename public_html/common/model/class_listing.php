@@ -508,4 +508,15 @@ return $out;
         
         return runQueryGetFirstValue($sql);
     }
+
+    public static function getTopGivers() {
+        $sql = "SELECT user_id, user_firstname, COUNT(*) AS given_count
+                FROM listing
+                WHERE listing_status = 'gone'
+                GROUP BY user_id, user_firstname
+                ORDER BY given_count DESC
+                LIMIT 5";
+
+        return runQueryGetAll($sql);
+    }
 }
