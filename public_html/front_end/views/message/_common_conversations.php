@@ -63,10 +63,10 @@
                             if (isset($show_no_show) && $show_no_show) {
                                 $reliabilityScore = ListingRequest::getReliabilityScore($_other_user_id);
                                 $givenCount = Listing::getGivenCount($_other_user_id);
+                                $badgeClass = $reliabilityScore >= 8 ? 'badge-success' : ($reliabilityScore >= 5 ? 'badge-warning' : 'badge-danger');
 
                                 ?>
-                                    <span class="ml-3 ">Reliability score: <?= $reliabilityScore ?>/10</span>
-
+                                    <span class="badge <?= $badgeClass ?>">Reliability Score: <?= $reliabilityScore ?>/10</span>
                                     <span class="ml-3 ">Items given away: <?= $givenCount ?></span>
                                 <?
                             }
