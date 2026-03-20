@@ -272,10 +272,25 @@ class ListingRequest extends CRModel {
     }
 
     public function toggleNoShow() {
-    $sql = "UPDATE listing_request
-    SET no_show = IF(no_show = 'y', 'n', 'y')
-    WHERE request_id = " . quoteSQL($this->request_id);
+        $sql = "UPDATE listing_request
+                SET no_show = IF(no_show = 'y', 'n', 'y')
+                WHERE request_id = " . quoteSQL($this->request_id);
 
-    return runQuery($sql);
-}
+        return runQuery($sql);
+    }
+
+    public static function getReliabilityScore($user_id) {
+        $user_id = (int)$user_id;
+
+        $sql = "SELECT COUNT(*) FROM (
+                    SELECT no_show
+                    FROM listing_request
+                    WHERE user_id = " . quoteSQL($user_id) . "
+                    ORDER BY request_id DESC
+                    LIMIT 10
+                ) AS recent
+                WHERE no_show = 'n'";
+        
+        return 10 - runQueryGetFirstValue($sql);
+    }
 }

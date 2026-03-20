@@ -60,6 +60,13 @@
                             }
 
                             
+                            if (isset($show_no_show) && $show_no_show) {
+                                $reliabilityScore = ListingRequest::getReliabilityScore($_other_user_id);
+
+                                ?>
+                                    <span>Reliability score: <?= $reliabilityScore ?>/10</span>
+                                <?
+                            }
                             ?>
                         </div>
 
