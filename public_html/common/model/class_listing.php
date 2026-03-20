@@ -498,4 +498,14 @@ return $out;
         }
     }
 
+    public static function getGivenCount($user_id) {
+        $user_id = (int)$user_id;
+
+        $sql = "SELECT COUNT(*)
+                FROM listing
+                WHERE user_id = " . quoteSQL($user_id) . "
+                AND listing_status = 'gone'";
+        
+        return runQueryGetFirstValue($sql);
+    }
 }

@@ -62,9 +62,12 @@
                             
                             if (isset($show_no_show) && $show_no_show) {
                                 $reliabilityScore = ListingRequest::getReliabilityScore($_other_user_id);
+                                $givenCount = Listing::getGivenCount($_other_user_id);
 
                                 ?>
-                                    <span>Reliability score: <?= $reliabilityScore ?>/10</span>
+                                    <span class="ml-3 ">Reliability score: <?= $reliabilityScore ?>/10</span>
+
+                                    <span class="ml-3 ">Items given away: <?= $givenCount ?></span>
                                 <?
                             }
                             ?>
