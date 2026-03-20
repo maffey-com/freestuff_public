@@ -90,7 +90,8 @@
         if (isset($show_no_show) && $show_no_show && !empty($_listing_requests)) {
             $tmp_request = reset($_listing_requests);
 
-            $tmp_no_show_text = $tmp_request['no_show'] === 'y' ? 'showed up' : 'no show';
+            // TODO: refactor no_show column to 'show' (y/n) to avoid double negative
+            $tmp_no_show_text = $tmp_request['no_show'] === 'n' ? 'showed up' : 'no show';
 
             ?>
                 <a data-listing_id="<?= $listing->listing_id ?>" data-request_id="<?= $tmp_request['request_id'] ?>" class='no-show-btn btn-danger btn btn-mobile'>Mark as <?= $tmp_no_show_text?></a>
