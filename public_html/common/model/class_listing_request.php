@@ -289,7 +289,7 @@ class ListingRequest extends CRModel {
                     ORDER BY request_id DESC
                     LIMIT 10
                 ) AS recent
-                WHERE no_show = 'n'";
+                WHERE no_show = 'y'";
         
         return 10 - runQueryGetFirstValue($sql);
     }

@@ -101,11 +101,11 @@
             $tmp_request = reset($_listing_requests);
 
             // TODO: refactor no_show column to 'show' (y/n) to avoid double negative
-            $tmp_no_show_text = $tmp_request['no_show'] === 'n' ? 'showed up' : 'no show';
+            $tmp_no_show_text = $tmp_request['no_show'] === 'n' ? 'Mark as' : 'Remove';
             $tmp_btn_class = $tmp_request['no_show'] === 'n' ? 'btn-danger' : 'btn-success';
 
             ?>
-                <a data-listing_id="<?= $listing->listing_id ?>" data-request_id="<?= $tmp_request['request_id'] ?>" class='no-show-btn <?= $tmp_btn_class ?> btn btn-mobile mb-5'>Mark as <?= $tmp_no_show_text?></a>
+                <a data-listing_id="<?= $listing->listing_id ?>" data-request_id="<?= $tmp_request['request_id'] ?>" class='no-show-btn <?= $tmp_btn_class ?> btn btn-mobile mb-5'><?= $tmp_no_show_text?> no show</a>
             <?
         }
     }
