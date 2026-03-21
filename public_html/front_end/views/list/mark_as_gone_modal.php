@@ -30,8 +30,9 @@
         ?>
     </div>
     <div class="modal-footer">
-        <span class="btn btn-secondary mark-item-taken"
-              data-user_id="0"><?= count($requests) == 0 ? 'Mark as gone' : 'None of the above' ?></span>
+        <span class="btn btn-secondary mark-item-taken" data-user_id="0">
+            <?= count($available_requests) == 0 ? 'Mark as gone' : 'None of the above' ?>
+        </span>
     </div>
 </div>
 <script>
