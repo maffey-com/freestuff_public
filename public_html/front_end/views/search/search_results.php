@@ -52,6 +52,18 @@
                             <h5 class="title text-truncate"><?= ($row_title) ?></h5>
                             <div>
                                 <b>Listed By:</b> &nbsp;<?= ($listing['firstname']) ?>
+
+                                <?
+                                $givenCount = Listing::getGivenCount($listing['user_id']);
+                                if ($givenCount >= 25) { $giverBadge = 'Gold Giver'; $giverColor = '#FFD700'; }
+                                elseif ($givenCount >= 10) { $giverBadge = 'Silver Giver'; $giverColor = '#D8D8D8'; }
+                                elseif ($givenCount >= 3) { $giverBadge = 'Bronze Giver'; $giverColor = '#E8A96A'; }
+                                else { $giverBadge = null; $giverColor = null; }
+
+                                if ($giverBadge) { ?>
+                                    <br>
+                                    <span class="badge" style="background-color: <?= $giverColor ?>; color: #333;"><?= $giverBadge ?></span>
+                                <? } ?>
                             </div>
                         </div>
                         <div class="listing-footer text-muted font-italic"><?= District::display2($listing['district_id']) ?></div>
