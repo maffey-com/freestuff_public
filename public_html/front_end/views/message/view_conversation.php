@@ -7,7 +7,7 @@
 ?>
 <div class="container">
     <div id="message-page">
-        <div class="d-sm-flex mb-3 align-items-center" id="html-other_person_info">
+        <div class="d-sm-flex mb-3 align-items-center" style="flex-wrap: wrap;" id="html-other_person_info">
             <h5 class="mr-5 mb-0" style="line-height: 1">
                 <b><?= ($other_user->firstname) ?></b> of <b> <?= clean(District::displayShort($other_user->district_id)) ?></b>
             </h5>
@@ -26,19 +26,26 @@
                 require_once("views/message/_common_thumbs.php");
             }
             ?>
-            <? if (!UserBlocked::isUserBlocked(SESSION_USER_ID, $other_user->user_id)) { ?>
-                <button class="btn btn-danger ajax-modal"
-                        data-href="<?= (APP_URL) ?>user_block/block_user_modal/<?= ($other_user->user_id) ?>">Block user
-                </button>
-                <?
-            } else {
-                ?>
-                <button class="btn btn-danger unblock_user" data-other_user_id="<?= ($other_user->user_id) ?>">
-                    Unblock user
-                </button>
-                <?
-            }
+
+            <?
+            $reliabilityScore = ListingRequest::getReliabilityScore($other_user->user_id);
+            $badgeClass = $reliabilityScore >= 8 ? 'badge-success' : ($reliabilityScore >= 5 ? 'badge-warning' : 'badge-danger');
             ?>
+            <span class="badge <?= $badgeClass ?>">Reliability Score: <?= $reliabilityScore ?>/10</span>
+
+            <div class="w-100 mt-1">
+                <? if (!UserBlocked::isUserBlocked(SESSION_USER_ID, $other_user->user_id)) { ?>
+                        <button class="btn btn-danger ajax-modal"
+                        data-href="<?= (APP_URL) ?>user_block/block_user_modal/<?= ($other_user->user_id) ?>">Block user
+                    </button>
+                    <?
+                } else {
+                    ?>
+                    <button class="btn btn-danger unblock_user" data-other_user_id="<?= ($other_user->user_id) ?>">
+                        Unblock user
+                    </button>
+                <? } ?>
+            </div>
         </div>
         <div class="mb-3">
             <?

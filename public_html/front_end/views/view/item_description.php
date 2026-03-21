@@ -47,10 +47,18 @@
 
             <p>
                 <b>Listed By:</b> <?= ($listing->user_firstname) ?>
+                <br>
+                
                 <?
+                $reliabilityScore = ListingRequest::getReliabilityScore($listing->user_id);
+                $badgeClass = $reliabilityScore >= 8 ? 'badge-success' : ($reliabilityScore >= 5 ? 'badge-warning' : 'badge-danger');
+                ?>
+                <span class="badge <?= $badgeClass ?>">Reliability Score: <?= $reliabilityScore ?>/10</span>
+                <?
+
                 if ($listing->isMyListing()) {
                     ?>
-                    <span class="badge badge-warning ml-2">My Listing</span>
+                    <span class="badge badge-warning">My Listing</span>
                     <?
                 } else {
                     $other_listings = Listing::getAllListingFromUserId($listing->user_id);
@@ -63,6 +71,7 @@
                         <?
                     }
                 }
+
                 ?>
             </p>
             <?
