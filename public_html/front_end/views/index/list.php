@@ -60,6 +60,7 @@
         ?>
     </div>
 
+    <? if (!empty($top_givers)) { ?>
     <div class="row mt-4">
         <div class="col-12">
             <h4>Top Givers</h4>
@@ -70,4 +71,5 @@
             </ul>
         </div>
     </div>  
+    <? } ?>
 </div>
