@@ -509,13 +509,18 @@ return $out;
         return runQueryGetFirstValue($sql);
     }
 
-    public static function getTopGivers() {
+    public static function getTopGivers($district_ids = null) {
         $sql = "SELECT user_id, user_firstname, COUNT(*) AS given_count
                 FROM listing
-                WHERE listing_status = 'gone'
-                GROUP BY user_id, user_firstname
-                ORDER BY given_count DESC
-                LIMIT 5";
+                WHERE listing_status = 'gone'";
+
+        if ($district_ids) {
+            $sql .= " AND district_id in" . quoteIN($district_ids);
+        }
+        
+        $sql .= " GROUP BY user_id, user_firstname
+                  ORDER BY given_count DESC
+                  LIMIT 5";
 
         return runQueryGetAll($sql);
     }

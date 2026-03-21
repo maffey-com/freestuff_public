@@ -14,6 +14,8 @@ class BrowseController extends _Controller  {
         $ip = paramFromHash('REMOTE_ADDR', $_SERVER);
 
         $district_ids = District::districtIdsForRegion($region_name);
+        $top_givers = Listing::getTopGivers($district_ids);
+
         if (!sizeof($district_ids)) {
             redirect("/");
         }
