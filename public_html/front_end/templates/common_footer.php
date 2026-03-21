@@ -14,7 +14,7 @@ $is_message_conversation = ($page_controller_method == 'message/conversation');
             if (!empty($top_givers)) { ?>
                 <div class="mt-4">
                     <h4>Top Givers</h4>
-                    <ul>
+                    <ul class="list-unstyled">
                         <? foreach ($top_givers as $giver) { ?>
                             <li><? h($giver['user_firstname']); ?>: <?= $giver['given_count'] ?> <?= $giver['given_count'] == 1 ? 'item' : 'items' ?> given away</li>
                         <? } ?>
