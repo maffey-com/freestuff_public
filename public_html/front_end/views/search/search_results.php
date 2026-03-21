@@ -68,13 +68,13 @@
                 <h4>Top Givers</h4>
                 <ul>
                     <? foreach ($top_givers as $giver) { ?>
-                        <li><?= h($giver['user_firstname']) ?>: <?= $giver['given_count'] ?> <?= $giver['given_count'] == 1 ? 'item' : 'items' ?> given away</li>
+                        <li><? h($giver['user_firstname']) ?>: <?= $giver['given_count'] ?> <?= $giver['given_count'] == 1 ? 'item' : 'items' ?> given away</li>
                     <? } ?>
                 </ul>
             </div>
         </div>  
     <? } 
-    
+
     require('templates/common_pager_bottom.php');
     ?>
 </div>
