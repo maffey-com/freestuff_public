@@ -50,6 +50,7 @@
                     </div>
                     <div class="listing-body">
                         <h5 class="title text-truncate"><?= ($tmp_title) ?></h5>
+                        <span><b>Listed By:</b> &nbsp;<?= h($v['firstname']) ?></span>
                     </div>
                     <div class="listing-footer text-muted font-italic"><?= District::display2($v['district_id']) ?></div>
                 </a>

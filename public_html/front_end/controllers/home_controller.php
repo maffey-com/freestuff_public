@@ -1,7 +1,7 @@
 <?php
 class HomeController extends _Controller {
     public function index() {
-        $sql = "SELECT l.* 
+        $sql = "SELECT l.* , u.firstname
                 FROM listing l 
                 JOIN user u ON l.user_id = u.user_id 
                 WHERE  listing_status = 'available' AND has_image = 'y' AND listing_type = 'free' 
