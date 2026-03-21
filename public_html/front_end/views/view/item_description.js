@@ -26,6 +26,26 @@ function toggleNoShow(elem) {
       elem.text("Mark as no show");
       elem.removeClass("btn-success").addClass("btn-danger");
     }
+
+    var userId = elem.data("user_id");
+
+    $.ajax({
+      url: "list/getReliabilityScore/" + userId,
+    }).done(function (reliabilityScore) {
+      var newScore = parseInt(reliabilityScore);
+      var newClass =
+        newScore >= 8
+          ? "badge-success"
+          : newScore >= 5
+            ? "badge-warning"
+            : "badge-danger";
+
+      var badge = $(".reliability-score-badge-" + userId);
+      badge.text("Reliability Score: " + newScore + "/10");
+      badge
+        .removeClass("badge-success badge-warning badge-danger")
+        .addClass(newClass);
+    });
   });
 }
 

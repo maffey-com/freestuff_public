@@ -71,7 +71,8 @@
                                 else { $giverBadge = null; $giverColor = null; }
 
                                 ?>
-                                    <span class="badge <?= $badgeClass ?>">Reliability Score: <?= $reliabilityScore ?>/10</span>
+                                    <span class="badge reliability-score-badge-<?= $_other_user_id ?> <?= $badgeClass ?>">Reliability Score: <?= $reliabilityScore ?>/10</span>
+
                                     <? if ($giverBadge): ?>
                                         <span class="badge ml-2" style="background-color: <?= $giverColor ?>; color: #333;"><?= $giverBadge ?></span>
                                     <? endif; ?>
@@ -105,7 +106,12 @@
             $tmp_btn_class = $tmp_request['no_show'] === 'n' ? 'btn-danger' : 'btn-success';
 
             ?>
-                <a data-listing_id="<?= $listing->listing_id ?>" data-request_id="<?= $tmp_request['request_id'] ?>" class='no-show-btn <?= $tmp_btn_class ?> btn btn-mobile mb-5'><?= $tmp_no_show_text?> no show</a>
+                <a data-listing_id="<?= $listing->listing_id ?>"
+                   data-request_id="<?= $tmp_request['request_id'] ?>"
+                   data-user_id="<?= $_other_user_id ?>"
+                   class='no-show-btn <?= $tmp_btn_class ?> btn btn-mobile mb-5'>
+                    <?= $tmp_no_show_text?> no show
+                </a>
             <?
         }
     }

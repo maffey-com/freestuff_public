@@ -351,4 +351,10 @@ class ListController extends _Controller {
 
         redirect(APP_URL . seoFriendlyURLs($listing->listing_id, 'listing', false, $listing->title));
     }
+
+    public function getReliabilityScore($user_id) {
+        $user_id = (int)$user_id;
+        echo ListingRequest::getReliabilityScore($user_id);
+        exit();
+    }
 }
