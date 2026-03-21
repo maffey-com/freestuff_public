@@ -27,9 +27,9 @@
 
         $_conversation_url = 'message/conversation/' . $_other_user_id;
         ?>
-        <div data-href="<?= ($_conversation_url) ?>" class="row row-conversation rounded rounded-lg"
+        <div data-href="<?= ($_conversation_url) ?>" class="row row-conversation rounded rounded-lg mt-2"
              id="row-conversation-<?= ($_conversation['conversation_key']) ?>">
-            <div class="col-3 col-md-3 col-lg-2 mb-2">
+            <div class="col-3 col-md-3 col-lg-2">
                 <?
                 ConversationThumbnailHandler::display('html-inbox_conversations', $_listing_requests, 3, FALSE, TRUE);
                 ?>
@@ -102,9 +102,10 @@
 
             // TODO: refactor no_show column to 'show' (y/n) to avoid double negative
             $tmp_no_show_text = $tmp_request['no_show'] === 'n' ? 'showed up' : 'no show';
+            $tmp_btn_class = $tmp_request['no_show'] === 'n' ? 'btn-danger' : 'btn-success';
 
             ?>
-                <a data-listing_id="<?= $listing->listing_id ?>" data-request_id="<?= $tmp_request['request_id'] ?>" class='no-show-btn btn-danger btn btn-mobile'>Mark as <?= $tmp_no_show_text?></a>
+                <a data-listing_id="<?= $listing->listing_id ?>" data-request_id="<?= $tmp_request['request_id'] ?>" class='no-show-btn <?= $tmp_btn_class ?> btn btn-mobile mb-5'>Mark as <?= $tmp_no_show_text?></a>
             <?
         }
     }
@@ -122,5 +123,9 @@
     .row-conversation:hover {
         background-color: #dee2e6;
         cursor: pointer;
+    }
+
+    .no-show-btn.btn-success {
+        color: white !important;
     }
 </style>
