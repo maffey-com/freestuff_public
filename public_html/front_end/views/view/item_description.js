@@ -12,11 +12,21 @@ function setNewStatus(elem) {
 }
 
 function toggleNoShow(elem) {
-  document.location =
-    "list/toggleNoShow/" +
-    elem.data("listing_id") +
-    "/" +
-    elem.data("request_id");
+  $.ajax({
+    url:
+      "list/toggleNoShow/" +
+      elem.data("listing_id") +
+      "/" +
+      elem.data("request_id"),
+  }).done(function () {
+    if (elem.text().trim() === "Mark as no show") {
+      elem.text("Remove no show");
+      elem.removeClass("btn-danger").addClass("btn-success");
+    } else {
+      elem.text("Mark as no show");
+      elem.removeClass("btn-success").addClass("btn-danger");
+    }
+  });
 }
 
 $(function () {
