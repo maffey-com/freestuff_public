@@ -293,4 +293,21 @@ class ListingRequest extends CRModel {
         
         return 10 - runQueryGetFirstValue($sql);
     }
+
+    public static function getTopRequesters($district_ids = null) {
+        $sql = "SELECT r.user_id, u.firstname AS user_firstname, COUNT(*) AS request_count
+                FROM listing_request r
+                JOIN listing l ON r.listing_id = l.listing_id
+                JOIN user u ON r.user_id = u.user_id";
+
+        if ($district_ids) {
+            $sql .= " WHERE l.district_id IN " . quoteIN($district_ids);
+        }
+
+        $sql .= " GROUP BY r.user_id, u.firstname
+                  ORDER BY request_count DESC
+                  LIMIT 5";
+
+        return runQueryGetAll($sql);
+    }
 }

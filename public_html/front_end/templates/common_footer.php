@@ -20,6 +20,18 @@ $is_message_conversation = ($page_controller_method == 'message/conversation');
                         <? } ?>
                     </ul>
                 </div>
+            <? }
+
+            $top_requesters = isset($district_ids) ? ListingRequest::getTopRequesters($district_ids) : ListingRequest::getTopRequesters();
+            if (!empty($top_requesters)) { ?>
+                <div class="mt-4">
+                    <h4>Top Requesters</h4>
+                    <ul class="list-unstyled">
+                        <? foreach ($top_requesters as $requester) { ?>
+                            <li><? h($requester['user_firstname']); ?>: <?= $requester['request_count'] ?> <?= $requester['request_count'] == 1 ? 'request' : 'requests' ?></li>
+                        <? } ?>
+                    </ul>
+                </div>
             <? } ?>
         </div>
     </div>
