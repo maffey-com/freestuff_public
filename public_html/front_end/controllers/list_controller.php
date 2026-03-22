@@ -59,11 +59,14 @@ class ListController extends _Controller {
         self::loginRequiredAndEchoJsonError();
 
         $listing = new Listing();
+        $listing->listing_id = (int)paramFromPost('listing_id');
+
+        // retrieve first so has_image is preserved, buildFromPost overwrites the rest
+        $listing->retrieveFromID($listing->listing_id);
         $listing->buildFromPost();
-        $listing->listing_id = (int)$listing->listing_id;
-
+        
         $is_edit = (!empty($listing->listing_id));
-
+        
         if ($is_edit) {
             if ($listing->updateFrontEnd()) {
                 if (isset($_POST["image_data"])) {
@@ -230,6 +233,21 @@ class ListController extends _Controller {
         }
     }
 
+    public function markAsNoLongerWanted($listing_id) {
+        $listing_id = (int)$listing_id;
+
+        $listing = Listing::instanceFromId($listing_id);
+
+        if (self::_canIDoStuffToThisListing($listing, FALSE)) {
+            $listing->markAsGone();
+
+            MessageHelper::setSessionSuccessMessage("Your listing has been marked as no longer wanted.");
+            redirect(APP_URL . 'my_freestuff');
+        } else {
+            MessageHelper::setSessionErrorMessage("You do not have permission to mark this listing as no longer wanted.");
+        }
+    }
+
     // Mark as taken delist the item and open a modal to add a feedback to the user who took it
     public function markAsGoneModal($listing_id) {
         if (SecurityHelper::isLoggedIn()) {
@@ -317,5 +335,26 @@ class ListController extends _Controller {
 
         echo json_encode($output);
         die();
+    }
+
+    public function toggleNoShow($listing_id, $request_id) {
+        $listing_id = (int)$listing_id;
+        $request_id = (int)$request_id;
+        
+        $listing = Listing::instanceFromId($listing_id);
+        $request = new ListingRequest();
+        $request->retrieveFromID($request_id);
+
+        if (self::_canIDoStuffToThisListing($listing)) {
+            $request->toggleNoShow();
+        }
+
+        redirect(APP_URL . seoFriendlyURLs($listing->listing_id, 'listing', false, $listing->title));
+    }
+
+    public function getReliabilityScore($user_id) {
+        $user_id = (int)$user_id;
+        echo ListingRequest::getReliabilityScore($user_id);
+        exit();
     }
 }

@@ -185,7 +185,10 @@ CREATE TABLE `listing` (
   `district_id` int DEFAULT NULL,
   `listing_status` enum('available','reserved','expired','gone','removed') NOT NULL DEFAULT 'available',
   PRIMARY KEY (`listing_id`),
-  FULLTEXT KEY `ft` (`title`,`description`)
+  FULLTEXT KEY `ft` (`title`,`description`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_district_id` (`district_id`),
+  KEY `idx_listing_status` (`listing_status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=92766 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -222,6 +225,7 @@ CREATE TABLE `listing_request` (
   `user_firstname` varchar(45) DEFAULT NULL,
   `user_ip_address` varchar(45) DEFAULT NULL,
   `district_id` int DEFAULT NULL,
+  `no_show` ENUM('y','n') NOT NULL DEFAULT 'n',
   PRIMARY KEY (`request_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=94315 DEFAULT CHARSET=latin1;
@@ -406,7 +410,9 @@ CREATE TABLE `user` (
   `request_credit_refresh_date` date DEFAULT NULL,
   `z_user_region` varchar(20) DEFAULT NULL,
   `brevo_push_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
+  KEY `idx_email` (`email`),
+  KEY `idx_mobile` (`mobile`)
 ) ENGINE=InnoDB AUTO_INCREMENT=162600 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

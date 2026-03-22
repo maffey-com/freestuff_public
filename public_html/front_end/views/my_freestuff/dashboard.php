@@ -57,6 +57,24 @@
                 </div>
             </div>
 
+            <div class="row mt-2">
+                <div class="col-12">
+                    <?
+                    $reliabilityScore = ListingRequest::getReliabilityScore(SESSION_USER_ID);
+                    $badgeClass = $reliabilityScore >= 8 ? 'badge-success' : ($reliabilityScore >= 5 ? 'badge-warning' : 'badge-danger');
+                    $givenCount = Listing::getGivenCount(SESSION_USER_ID);
+                    if ($givenCount >= 25) { $giverBadge = 'Gold Giver'; $giverColor = '#FFD700'; }
+                    elseif ($givenCount >= 10) { $giverBadge = 'Silver Giver'; $giverColor = '#D8D8D8'; }
+                    elseif ($givenCount >= 3) { $giverBadge = 'Bronze Giver'; $giverColor = '#E8A96A'; }
+                    else { $giverBadge = null; $giverColor = null; }
+                    ?>
+                    <span class="badge <?= $badgeClass ?>">Reliability Score: <?= $reliabilityScore ?>/10</span>
+                    <? if ($giverBadge) { ?>
+                        <span class="badge ml-2" style="background-color: <?= $giverColor ?>; color: #333;"><?= $giverBadge ?></span>
+                    <? } ?>
+                </div>
+            </div>
+
         </div>
         <div class="col-12 col-md-6 my-details">
             <div class="row">

@@ -21,22 +21,29 @@ class SearchController extends _Controller {
         $listing_filter = new FilterHelper('listings');
         $listing_filter->setDefault('listing_type','free');
 
-        $sql = "SELECT *, 0 crow_flies_dist 
+        $sql = "SELECT l.*, u.firstname, 0 crow_flies_dist 
                 FROM listing l 
                 JOIN user u ON l.user_id = u.user_id 
                 WHERE l.listing_status IN ('available','reserved')";
         $sql .= empty($search_string) ? "" : " AND (MATCH(title, description) AGAINST ( " . quoteSQL($search_string) . ") OR listing_id = " . quoteSQL(preg_replace("/[^0-9]/","",$search_string)) . ")";
-        if ($listing_filter->listing_type != 'all') {
-           // $sql .= " AND l.listing_type =" . quoteSQL($listing_filter->listing_type);
+        
+        $sort_dir = paramFromGet('sort') === 'oldest' ? 'asc' : 'desc';
+        $sort_col = 'listing_date';
+
+        $type_param = paramFromGet('listing_type');
+        $listing_type = in_array($type_param, ['free', 'wanted', 'all']) ? $type_param : null;
+
+        if ($listing_type && $listing_type !== 'all') {
+            $sql .= " AND l.listing_type = " . quoteSQL($listing_type);
         }
 
-        $listings = new DataWindowHelper("browse", $sql, "crow_flies_dist", "asc", 10);
+        $listings = new DataWindowHelper("browse", $sql, $sort_col, $sort_dir, 10);
         $listings->run();
         $paging = $listings->getPaging();
 
         PageHelper::setRssLink(APP_URL . "rss_feed?search_string=" . $search_string);
 
-        TemplateHandler::setSearchText($search_string);
+        TemplateHandler::setSearchText($search_string ?? '');
         PageHelper::setViews('views/search/banner.php', "views/search/search_results.php");
 
         BreadcrumbHelper::addBreadcrumbs('Search');

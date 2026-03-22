@@ -46,23 +46,25 @@
             </p>
 
             <p>
-                <b>Listed By:</b> <?= ($listing->user_firstname) ?>
+                <b>Listed By:</b> <span class="user-listings-link" data-href="<?= APP_URL ?>user/all_listings/<?= ($listing->user_id) ?>" style="cursor:pointer; color: #007bff; text-decoration: underline;"><?= ($listing->user_firstname) ?></span>
+                <br>
+                
                 <?
+                $givenCount = Listing::getGivenCount($listing->user_id);
+                if ($givenCount >= 25) { $giverBadge = 'Gold Giver'; $giverColor = '#FFD700'; }
+                elseif ($givenCount >= 10) { $giverBadge = 'Silver Giver'; $giverColor = '#D8D8D8'; }
+                elseif ($givenCount >= 3) { $giverBadge = 'Bronze Giver'; $giverColor = '#E8A96A'; }
+                else { $giverBadge = null; $giverColor = null; }
+
+                if ($giverBadge) { ?>
+                    <span class="badge" style="background-color: <?= $giverColor ?>; color: #333;"><?= $giverBadge ?></span>
+                <? }
+
                 if ($listing->isMyListing()) {
                     ?>
-                    <span class="badge badge-warning ml-2">My Listing</span>
+                    <span class="badge badge-warning">My Listing</span>
                     <?
-                } else {
-                    $other_listings = Listing::getAllListingFromUserId($listing->user_id);
-                    $other_listing_count = count($other_listings);
-
-                    if ($other_listing_count > 0) {
-                        ?>
-                        <a class="small" href="<?= (APP_URL) ?>user/all_listings/<?= ($listing->user_id) ?>">(All
-                            listings from this user)</a>
-                        <?
-                    }
-                }
+                } 
                 ?>
             </p>
             <?

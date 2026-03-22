@@ -185,12 +185,13 @@ class Listing extends CRModel {
     public function updateFrontEnd() {
         $fh = new FileHelper('temporary_listing_image', "temp_" . $this->temp_id);
         $has_image = $fh->getFileNameFromTag("most_recent_upload");
+        $current_has_image = $has_image ? "y" : ($this->has_image ? "y" : "n");
 
         if ($this->validate()) {
             $sql = "UPDATE listing SET ";
             $sql .= " title = " . quoteSQL($this->title);
             $sql .= " ,description = " . quoteSQL($this->description);
-            $sql .= " ,has_image = " . quoteSQL(($has_image ? "y" : "n"));
+            $sql .= " ,has_image = " . quoteSQL($current_has_image);
             $sql .= ", last_updated = NOW()";
             $sql .= " ,listing_type = " . quoteSQL($this->listing_type);
             $sql .= " ,district_id = " . quoteSQL($this->district_id);
@@ -497,4 +498,61 @@ return $out;
         }
     }
 
+    public static function getGivenCount($user_id) {
+        $user_id = (int)$user_id;
+
+        $sql = "SELECT COUNT(*)
+                FROM listing
+                WHERE user_id = " . quoteSQL($user_id) . "
+                AND listing_status = 'gone'";
+        
+        return runQueryGetFirstValue($sql);
+    }
+
+    public static function getTopGivers($district_ids = null) {
+        $sql = "SELECT user_id, user_firstname, COUNT(*) AS given_count
+                FROM listing
+                WHERE listing_status = 'gone'";
+
+        if ($district_ids) {
+            $sql .= " AND district_id in" . quoteIN($district_ids);
+        }
+        
+        $sql .= " GROUP BY user_id, user_firstname
+                  ORDER BY given_count DESC
+                  LIMIT 5";
+
+        return runQueryGetAll($sql);
+    }
+
+    public static function getRecentActivity($district_ids = null, $limit = 10) {
+        $limit = (int)$limit;
+
+        $sql = "SELECT 'listed' AS activity_type, l.listing_id, l.title, u.firstname, l.listing_date AS activity_date
+                FROM listing l
+                JOIN user u ON l.user_id = u.user_id
+                WHERE l.listing_type = 'free'
+                AND DATEDIFF(CURDATE(), l.listing_date) <= 7";
+
+        if ($district_ids) {
+            $sql .= " AND l.district_id IN " . quoteIN($district_ids);
+        }
+
+        $sql .= " UNION ALL
+                  SELECT 'requested' AS activity_type, l.listing_id, l.title, u.firstname, r.request_timestamp AS activity_date
+                  FROM listing_request r
+                  JOIN listing l ON r.listing_id = l.listing_id
+                  JOIN user u ON r.user_id = u.user_id
+                  WHERE DATEDIFF(CURDATE(), r.request_timestamp) <= 7";
+
+        if ($district_ids) {
+            $sql .= " AND l.district_id IN " . quoteIN($district_ids);
+        }
+
+
+        $sql .= " ORDER BY activity_date DESC
+                  LIMIT " . $limit;
+
+        return runQueryGetAll($sql);
+    }
 }

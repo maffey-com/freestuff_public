@@ -103,8 +103,9 @@ class MyFreestuffController extends _Controller {
                 break;
 
             case 'watchlist':
-                $sql = "SELECT * 
-                        FROM listing 
+                $sql = "SELECT l.*, u.firstname 
+                        FROM listing l
+                        JOIN user u ON u.user_id = l.user_id
                         WHERE listing_id IN (
                             SELECT DISTINCT listing_id 
                             FROM listing_request 
@@ -131,7 +132,17 @@ class MyFreestuffController extends _Controller {
                 break;
         }
 
-        $listings = new DataWindowHelper("browse", $sql, "listing_date", "desc", 12);
+        $sort_dir = paramFromGet('sort') === 'oldest' ? 'asc' : 'desc';
+
+        $type_param = paramFromGet('listing_type');
+        $listing_type = in_array($type_param, ['free', 'wanted', 'all']) ? $type_param : null;
+        
+        if ($listing_type && $listing_type !== 'all') {
+            $sql .= " AND l.listing_type = " . quoteSQL($listing_type);
+        }
+
+        $listings = new DataWindowHelper("browse", $sql, "listing_date", $sort_dir, 12);
+
         $listings->run();
         $paging = $listings->getPaging();
 

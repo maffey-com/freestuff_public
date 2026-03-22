@@ -43,16 +43,31 @@
             $tmp_img = $temp_img->getImagePathFromTag("most_recent_upload", 320, 320);
             $tmp_url = seoFriendlyURLs($tmp_id, "listing", false, $tmp_title); ?>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 listing-item-col" title="<?= ($tmp_title) ?>">
-                <a class='listing-item listing-item-home text-left' href="<?= ($tmp_url) ?>">
+                <div class='listing-item listing-item-home text-left'>
                     <div class='pic_bit'>
                         <img src='<?= ($tmp_img) ?>' alt='<?= (htmlentities($tmp_title, ENT_QUOTES)) ?>'
                              title='<?= (htmlentities($tmp_title, ENT_QUOTES)) ?>'/>
                     </div>
                     <div class="listing-body">
-                        <h5 class="title text-truncate"><?= ($tmp_title) ?></h5>
+                        <h5 data-href="<?= ($tmp_url) ?>" style="cursor:pointer; text-decoration: underline" class="title text-truncate"><?= ($tmp_title) ?></h5>
+                        <span>
+                            <b>Listed By:</b> &nbsp;<span class="user-listings-link" data-href="<?= APP_URL ?>user/all_listings/<?= ($v['user_id']) ?>" style="cursor:pointer; color: #007bff; text-decoration: underline;"><?= h($v['firstname']) ?></span>
+
+                            <?
+                            $givenCount = Listing::getGivenCount($v['user_id']);
+                            if ($givenCount >= 25) { $giverBadge = 'Gold Giver'; $giverColor = '#FFD700'; }
+                            elseif ($givenCount >= 10) { $giverBadge = 'Silver Giver'; $giverColor = '#D8D8D8'; }
+                            elseif ($givenCount >= 3) { $giverBadge = 'Bronze Giver'; $giverColor = '#E8A96A'; }
+                            else { $giverBadge = null; $giverColor = null; }
+
+                            if ($giverBadge) { ?>
+                                <br>
+                                <span class="badge" style="background-color: <?= $giverColor ?>; color: #333;"><?= $giverBadge ?></span>
+                            <? } ?>
+                        </span>
                     </div>
                     <div class="listing-footer text-muted font-italic"><?= District::display2($v['district_id']) ?></div>
-                </a>
+                </div>
             </div>
             <?
         }

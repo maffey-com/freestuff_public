@@ -8,20 +8,44 @@ $is_message_conversation = ($page_controller_method == 'message/conversation');
 
     <div style="background-color: #dddddd" class="pt-4 pb-5 mt-5">
         <div class="container text-center">
-            <p class="text-secondary py-2">The Obligatory Advert</p>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5315463470321244"
-                    crossorigin="anonymous"></script>
-            <!-- My Responsive -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-5315463470321244"
-                 data-ad-slot="6436361523"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <?
+            $top_givers = isset($district_ids) ? Listing::getTopGivers($district_ids) : Listing::getTopGivers();
 
+            if (!empty($top_givers)) { ?>
+                <div class="mt-4">
+                    <h4>Top Givers</h4>
+                    <ul class="list-unstyled">
+                        <? foreach ($top_givers as $giver) { ?>
+                            <li><? h($giver['user_firstname']); ?>: <?= $giver['given_count'] ?> <?= $giver['given_count'] == 1 ? 'item' : 'items' ?> given away</li>
+                        <? } ?>
+                    </ul>
+                </div>
+            <? }
+
+            $top_requesters = isset($district_ids) ? ListingRequest::getTopRequesters($district_ids) : ListingRequest::getTopRequesters();
+            if (!empty($top_requesters)) { ?>
+                <div class="mt-4">
+                    <h4>Top Requesters</h4>
+                    <ul class="list-unstyled">
+                        <? foreach ($top_requesters as $requester) { ?>
+                            <li><? h($requester['user_firstname']); ?>: <?= $requester['request_count'] ?> <?= $requester['request_count'] == 1 ? 'request' : 'requests' ?></li>
+                        <? } ?>
+                    </ul>
+                </div>
+            <? }
+
+            $recent_activity = isset($district_ids) ? Listing::getRecentActivity($district_ids) : Listing::getRecentActivity();
+            
+            if (!empty($recent_activity)) { ?>
+                <div class="mt-4">
+                    <h4>Recent Activity</h4>
+                    <ul class="list-unstyled">
+                        <? foreach ($recent_activity as $event) { ?>
+                            <li><? h($event['firstname']); ?> <?= $event['activity_type'] ?> <a href="<?= seoFriendlyURLs($event['listing_id'], 'listing', false, $event['title']) ?>"><? h($event['title']); ?></a></li>
+                        <? } ?>
+                    </ul>
+                </div>
+            <? } ?>
         </div>
     </div>
 

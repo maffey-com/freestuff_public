@@ -48,4 +48,22 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col mb-4">
+            <div class="h4">What is a reliability score?</div>
+            <p class="answer">Your reliability score is out of 10 and is based on your last 10 requests. Each time a giver marks you as a no-show, your score goes down by 1. A score of 8 or above is green, 5–7 is yellow, and below 5 is red. Turning up when you say you will keeps your score high.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-4">
+            <div class="h4">What are giver badges?</div>
+            <p class="answer">Giver badges recognise users who have given away items on Freestuff. Give away 3 or more items to earn a Bronze Giver badge, 10 or more for Silver, and 25 or more for Gold.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="h4">What does no-show mean?</div>
+            <p class="answer">A no-show is when a requester arranges to pick up an item but doesn't turn up. Givers can mark requesters as no-shows, which affects their reliability score. If you are marked as a no-show by mistake, contact the giver to sort it out.</p>
+        </div>
+    </div>
 </div>

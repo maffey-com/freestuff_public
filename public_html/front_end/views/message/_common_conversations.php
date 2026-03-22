@@ -27,9 +27,9 @@
 
         $_conversation_url = 'message/conversation/' . $_other_user_id;
         ?>
-        <div data-href="<?= ($_conversation_url) ?>" class="row row-conversation rounded rounded-lg"
+        <div data-href="<?= ($_conversation_url) ?>" class="row row-conversation rounded rounded-lg mt-2"
              id="row-conversation-<?= ($_conversation['conversation_key']) ?>">
-            <div class="col-3 col-md-3 col-lg-2 mb-2">
+            <div class="col-3 col-md-3 col-lg-2">
                 <?
                 ConversationThumbnailHandler::display('html-inbox_conversations', $_listing_requests, 3, FALSE, TRUE);
                 ?>
@@ -56,9 +56,26 @@
                                 $u_requester->thumbs_down = $requester_users[$_other_user_id]['thumbs_down'];
                                 $is_thumb_clickable = FALSE;
 
-                                require("views/message/_common_thumbs.php");
+                                require("views/message/_common_thumbs.php"); 
                             }
+
+                            
+                          
+                            $reliabilityScore = ListingRequest::getReliabilityScore($_other_user_id);
+                            $givenCount = Listing::getGivenCount($_other_user_id);
+                            $badgeClass = $reliabilityScore >= 8 ? 'badge-success' : ($reliabilityScore >= 5 ? 'badge-warning' : 'badge-danger');
+
+                            if ($givenCount >= 25) { $giverBadge = 'Gold Giver'; $giverColor = '#FFD700'; }
+                            elseif ($givenCount >= 10) { $giverBadge = 'Silver Giver'; $giverColor = '#D8D8D8'; }
+                            elseif ($givenCount >= 3) { $giverBadge = 'Bronze Giver'; $giverColor = '#E8A96A'; }
+                            else { $giverBadge = null; $giverColor = null; }
+
                             ?>
+                            <span class="badge reliability-score-badge-<?= $_other_user_id ?> <?= $badgeClass ?>">Reliability Score: <?= $reliabilityScore ?>/10</span>
+
+                            <? if ($giverBadge) { ?>
+                                <span class="badge ml-2" style="background-color: <?= $giverColor ?>; color: #333;"><?= $giverBadge ?></span>
+                            <? } ?>
                         </div>
 
                         <div class="mb-2">
@@ -78,6 +95,22 @@
             </div>
         </div>
         <?
+        if (isset($show_no_show) && $show_no_show && !empty($_listing_requests)) {
+            $tmp_request = reset($_listing_requests);
+
+            // TODO: refactor no_show column to 'show' (y/n) to avoid double negative
+            $tmp_no_show_text = $tmp_request['no_show'] === 'n' ? 'Mark as' : 'Remove';
+            $tmp_btn_class = $tmp_request['no_show'] === 'n' ? 'btn-danger' : 'btn-success';
+
+            ?>
+                <a data-listing_id="<?= $listing->listing_id ?>"
+                   data-request_id="<?= $tmp_request['request_id'] ?>"
+                   data-user_id="<?= $_other_user_id ?>"
+                   class='no-show-btn <?= $tmp_btn_class ?> btn btn-mobile mb-5'>
+                    <?= $tmp_no_show_text?> no show
+                </a>
+            <?
+        }
     }
     ?>
 </div>
@@ -93,5 +126,9 @@
     .row-conversation:hover {
         background-color: #dee2e6;
         cursor: pointer;
+    }
+
+    .no-show-btn.btn-success {
+        color: white !important;
     }
 </style>

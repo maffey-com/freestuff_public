@@ -49,7 +49,7 @@ class ListingRequest extends CRModel {
     public function retrieveFromID($request_id) {
         $request_id = (int)$request_id;
 
-        $sql = "SELECT request_id, listing_id, request_timestamp, user_id, user_firstname,  user_ip_address, district_id
+        $sql = "SELECT *
 				FROM listing_request 
 				WHERE request_id = " . quoteSQL($request_id);
         $row = runQueryGetFirstRow($sql);
@@ -229,7 +229,7 @@ class ListingRequest extends CRModel {
         }
 
         $sql = "SELECT l.listing_id,l.title, l.user_id lister_user_id, l.title listing_title,
-                r.request_timestamp, l.listing_status, 
+                r.request_timestamp, l.listing_status, r.request_id, r.no_show,
                 IF(l.user_id = " . quoteSQL($my_user_id) . ", 'y', 'n') is_lister,
                 IF(r.user_id = " . quoteSQL($my_user_id) . ", l.user_id, r.user_id) other_user_id
                 FROM listing l 
@@ -269,5 +269,45 @@ class ListingRequest extends CRModel {
         }
 
         return $output;
+    }
+
+    public function toggleNoShow() {
+        $sql = "UPDATE listing_request
+                SET no_show = IF(no_show = 'y', 'n', 'y')
+                WHERE request_id = " . quoteSQL($this->request_id);
+
+        return runQuery($sql);
+    }
+
+    public static function getReliabilityScore($user_id) {
+        $user_id = (int)$user_id;
+
+        $sql = "SELECT COUNT(*) FROM (
+                    SELECT no_show
+                    FROM listing_request
+                    WHERE user_id = " . quoteSQL($user_id) . "
+                    ORDER BY request_id DESC
+                    LIMIT 10
+                ) AS recent
+                WHERE no_show = 'y'";
+        
+        return 10 - runQueryGetFirstValue($sql);
+    }
+
+    public static function getTopRequesters($district_ids = null) {
+        $sql = "SELECT r.user_id, u.firstname AS user_firstname, COUNT(*) AS request_count
+                FROM listing_request r
+                JOIN listing l ON r.listing_id = l.listing_id
+                JOIN user u ON r.user_id = u.user_id";
+
+        if ($district_ids) {
+            $sql .= " WHERE l.district_id IN " . quoteIN($district_ids);
+        }
+
+        $sql .= " GROUP BY r.user_id, u.firstname
+                  ORDER BY request_count DESC
+                  LIMIT 5";
+
+        return runQueryGetAll($sql);
     }
 }

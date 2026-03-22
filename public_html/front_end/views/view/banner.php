@@ -42,7 +42,7 @@
                                             <?= $tmp_button_taken_text ?>
                                         </button>
                                         <button class="btn btn-primary ajax-modal"
-                                                data-href="<? (APP_URL) ?>list/mark_as_reserved_modal/<?= $listing->listing_id ?>">
+                                                data-href="<?= (APP_URL) ?>list/mark_as_reserved_modal/<?= $listing->listing_id ?>">
                                             <?= $tmp_button_reserved_text ?>
                                         </button>
                                     <? } else { ?>
