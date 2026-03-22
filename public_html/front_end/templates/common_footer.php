@@ -32,6 +32,19 @@ $is_message_conversation = ($page_controller_method == 'message/conversation');
                         <? } ?>
                     </ul>
                 </div>
+            <? }
+
+            $recent_activity = isset($district_ids) ? Listing::getRecentActivity($district_ids) : Listing::getRecentActivity();
+            
+            if (!empty($recent_activity)) { ?>
+                <div class="mt-4">
+                    <h4>Recent Activity</h4>
+                    <ul class="list-unstyled">
+                        <? foreach ($recent_activity as $event) { ?>
+                            <li><? h($event['firstname']); ?> <?= $event['activity_type'] ?> <a href="<?= seoFriendlyURLs($event['listing_id'], 'listing', false, $event['title']) ?>"><? h($event['title']); ?></a></li>
+                        <? } ?>
+                    </ul>
+                </div>
             <? } ?>
         </div>
     </div>

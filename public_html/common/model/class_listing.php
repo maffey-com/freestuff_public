@@ -524,4 +524,35 @@ return $out;
 
         return runQueryGetAll($sql);
     }
+
+    public static function getRecentActivity($district_ids = null, $limit = 10) {
+        $limit = (int)$limit;
+
+        $sql = "SELECT 'listed' AS activity_type, l.listing_id, l.title, u.firstname, l.listing_date AS activity_date
+                FROM listing l
+                JOIN user u ON l.user_id = u.user_id
+                WHERE l.listing_type = 'free'
+                AND DATEDIFF(CURDATE(), l.listing_date) <= 7";
+
+        if ($district_ids) {
+            $sql .= " AND l.district_id IN " . quoteIN($district_ids);
+        }
+
+        $sql .= " UNION ALL
+                  SELECT 'requested' AS activity_type, l.listing_id, l.title, u.firstname, r.request_timestamp AS activity_date
+                  FROM listing_request r
+                  JOIN listing l ON r.listing_id = l.listing_id
+                  JOIN user u ON r.user_id = u.user_id
+                  WHERE DATEDIFF(CURDATE(), r.request_timestamp) <= 7";
+
+        if ($district_ids) {
+            $sql .= " AND l.district_id IN " . quoteIN($district_ids);
+        }
+
+
+        $sql .= " ORDER BY activity_date DESC
+                  LIMIT " . $limit;
+
+        return runQueryGetAll($sql);
+    }
 }
