@@ -23,7 +23,7 @@
                 $thumbnail = $temp_img->getImagePathFromTag("most_recent_upload", 320, 320); ?>
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 listing-item-col">
-                    <a class='listing-item listing-item-home text-left' href="<?= ($row_url) ?>">
+                    <div class='listing-item listing-item-home text-left'>
                         <div class='pic_bit'>
                             <img src='<?= ($thumbnail) ?>' alt='<?= ($row_title) ?>' title='<?= ($row_title) ?>'/>
                         </div>
@@ -38,7 +38,7 @@
                                         <span class="badge badge-danger mr-1">Wanted</span>
                                         <?
                                     }
-
+    
                                     if ($row_is_my_listing) {
                                         ?>
                                         <span class="badge badge-warning">My Listing</span>
@@ -49,25 +49,25 @@
                                 <?
                             }
                             ?>
-                            <h5 class="title text-truncate"><?= ($row_title) ?></h5>
+                            <h5 data-href="<?= ($row_url) ?>" style="cursor:pointer; text-decoration: underline" class="title text-truncate"><?= ($row_title) ?></h5>
                             <div>
-                                <b>Listed By:</b> &nbsp;<?= ($listing['firstname']) ?>
-
+                                <b>Listed By:</b> &nbsp;<span class="user-listings-link" data-href="<?= APP_URL ?>user/all_listings/<?= ($listing['user_id']) ?>" style="cursor:pointer; color: #007bff; text-decoration: underline;"><? h($listing['firstname']) ?></span>
+    
                                 <?
                                 $givenCount = Listing::getGivenCount($listing['user_id']);
                                 if ($givenCount >= 25) { $giverBadge = 'Gold Giver'; $giverColor = '#FFD700'; }
                                 elseif ($givenCount >= 10) { $giverBadge = 'Silver Giver'; $giverColor = '#D8D8D8'; }
                                 elseif ($givenCount >= 3) { $giverBadge = 'Bronze Giver'; $giverColor = '#E8A96A'; }
                                 else { $giverBadge = null; $giverColor = null; }
-
+    
                                 if ($giverBadge) { ?>
                                     <br>
                                     <span class="badge" style="background-color: <?= $giverColor ?>; color: #333;"><?= $giverBadge ?></span>
                                 <? } ?>
                             </div>
                         </div>
-                        <div class="listing-footer text-muted font-italic"><?= District::display2($listing['district_id']) ?></div>
-                    </a>
+                        <div class="listing-footer text-muted font-italic"><?= District::display2($listing['district_id']) ?></div>    
+                    </div>
                 </div>
                 <?
             }
