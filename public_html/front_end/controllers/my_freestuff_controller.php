@@ -103,8 +103,9 @@ class MyFreestuffController extends _Controller {
                 break;
 
             case 'watchlist':
-                $sql = "SELECT * 
-                        FROM listing 
+                $sql = "SELECT l.*, u.firstname 
+                        FROM listing l
+                        JOIN user u ON u.user_id = l.user_id
                         WHERE listing_id IN (
                             SELECT DISTINCT listing_id 
                             FROM listing_request 

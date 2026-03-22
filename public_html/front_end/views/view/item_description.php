@@ -50,11 +50,15 @@
                 <br>
                 
                 <?
-                $reliabilityScore = ListingRequest::getReliabilityScore($listing->user_id);
-                $badgeClass = $reliabilityScore >= 8 ? 'badge-success' : ($reliabilityScore >= 5 ? 'badge-warning' : 'badge-danger');
-                ?>
-                <span class="badge <?= $badgeClass ?>">Reliability Score: <?= $reliabilityScore ?>/10</span>
-                <?
+                $givenCount = Listing::getGivenCount($listing->user_id);
+                if ($givenCount >= 25) { $giverBadge = 'Gold Giver'; $giverColor = '#FFD700'; }
+                elseif ($givenCount >= 10) { $giverBadge = 'Silver Giver'; $giverColor = '#D8D8D8'; }
+                elseif ($givenCount >= 3) { $giverBadge = 'Bronze Giver'; $giverColor = '#E8A96A'; }
+                else { $giverBadge = null; $giverColor = null; }
+
+                if ($giverBadge) { ?>
+                    <span class="badge" style="background-color: <?= $giverColor ?>; color: #333;"><?= $giverBadge ?></span>
+                <? }
 
                 if ($listing->isMyListing()) {
                     ?>
