@@ -55,6 +55,17 @@ mkdir ./storage/cache
 mkdir ./storage/site_files/flood
 ```
 
+# Migration (skip if setting up fresh)
+
+```sql
+ALTER TABLE listing_request ADD COLUMN no_show ENUM('y','n') NOT NULL DEFAULT 'n';
+ALTER TABLE listing ADD INDEX idx_user_id (user_id);
+ALTER TABLE listing ADD INDEX idx_district_id (district_id);
+ALTER TABLE listing ADD INDEX idx_listing_status (listing_status);
+ALTER TABLE user ADD INDEX idx_email (email);
+ALTER TABLE user ADD INDEX idx_mobile (mobile);
+```
+
 # Usage
 
 local frontend url:
