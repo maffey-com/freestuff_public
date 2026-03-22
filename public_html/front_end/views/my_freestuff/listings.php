@@ -9,8 +9,23 @@
 <div class="container">
     <div id="" class="row fs-page-header">
         <div class="col">
-            <div class="d-block d-md-flex">
-                <h1 class="mb-3 mb-md-0"><?=($title)?></h1>
+            <div class="d-block d-md-flex align-items-start">
+                <div>
+                    <h1 class="mb-2"><?=($title)?></h1>
+                    <?
+                    $base_url = APP_URL . 'my_freestuff/listings/' . $which . '?';
+                    $current_sort = paramFromGet('sort') === 'oldest' ? 'oldest' : 'newest';
+                    $current_type = in_array(paramFromGet('listing_type'), ['free', 'wanted', 'all']) ? paramFromGet('listing_type') : 'all';
+                    ?>
+                    <div class="mb-2">
+                        <a href="<?= $base_url ?>listing_type=free<?= $current_sort === 'oldest' ? '&sort=oldest' : '' ?>" class="btn btn-sm <?= $current_type === 'free' ? 'btn-primary' : 'btn-outline-secondary' ?>">Free</a>
+                        <a href="<?= $base_url ?>listing_type=wanted<?= $current_sort === 'oldest' ? '&sort=oldest' : '' ?>" class="btn btn-sm <?= $current_type === 'wanted' ? 'btn-primary' : 'btn-outline-secondary' ?>">Wanted</a>
+                        <a href="<?= $base_url ?>listing_type=all<?= $current_sort === 'oldest' ? '&sort=oldest' : '' ?>" class="btn btn-sm <?= $current_type === 'all' ? 'btn-primary' : 'btn-outline-secondary' ?>">All</a>
+                        &nbsp;
+                        <a href="<?= $base_url ?>listing_type=<?= $current_type ?>" class="btn btn-sm <?= $current_sort === 'newest' ? 'btn-primary' : 'btn-outline-secondary' ?>">Newest</a>
+                        <a href="<?= $base_url ?>listing_type=<?= $current_type ?>&sort=oldest" class="btn btn-sm <?= $current_sort === 'oldest' ? 'btn-primary' : 'btn-outline-secondary' ?>">Oldest</a>
+                    </div>
+                </div>
 
                 <?
                 if ($which != 'current') {

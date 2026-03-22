@@ -12,11 +12,18 @@ class UserController extends _Controller {
                 JOIN user u ON l.user_id = u.user_id
                 WHERE l.listing_status IN ('available','reserved')
                 AND u.user_id = " . quoteSQL($user_id);
-        if ($listing_filter->listing_type != 'all') {
-          //  $sql .= " AND listing_type =" . quoteSQL($listing_filter->listing_type);
+        
+        $sort_dir = paramFromGet('sort') === 'oldest' ? 'asc' : 'desc';
+
+        $type_param = paramFromGet('listing_type');
+        $listing_type = in_array($type_param, ['free', 'wanted', 'all']) ? $type_param : null;
+        
+        if ($listing_type && $listing_type !== 'all') {
+            $sql .= " AND l.listing_type = " . quoteSQL($listing_type);
         }
 
-        $listings = new DataWindowHelper("browse", $sql, "listing_date", "desc", 10);
+        $listings = new DataWindowHelper("browse", $sql, "listing_date", $sort_dir, 10);
+
         $listings->run();
         $paging = $listings->getPaging();
 

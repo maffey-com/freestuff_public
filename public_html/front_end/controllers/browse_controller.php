@@ -24,11 +24,16 @@ class BrowseController extends _Controller  {
                 JOIN user u on l.user_id = u.user_id 
                 WHERE l.listing_status IN ('available','reserved') 
                 AND l.district_id in " . quoteIN($district_ids);
-        if ($listing_filter->listing_type != 'all') {
-        //    $sql .= " AND listing_type =" . quoteSQL($listing_filter->listing_type);
+
+        $sort_dir = paramFromGet('sort') === 'oldest' ? 'asc' : 'desc';
+
+        $type_param = paramFromGet('listing_type');
+        $listing_type = in_array($type_param, ['free', 'wanted', 'all']) ? $type_param : null;
+        if ($listing_type && $listing_type !== 'all') {
+            $sql .= " AND l.listing_type = " . quoteSQL($listing_type);
         }
 
-        $listings = new DataWindowHelper("browse", $sql, "listing_date", "desc", 20);
+        $listings = new DataWindowHelper("browse", $sql, "listing_date", $sort_dir, 20);
         $listings->run();
         $paging = $listings->getPaging();
 
