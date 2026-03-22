@@ -3,7 +3,7 @@ class Recaptcha {
     public static function checkCaptcha() {
         //recapture
         $url = "https://www.google.com/recaptcha/api/siteverify";
-        $url .= "?secret=".RECAPTCHA_SITE_SECRET;
+        $url .= "?secret=".RECAPTCHA_SECRET_KEY;
         $url .= "&response=" . paramFromPost("g-recaptcha-response");
         $url .= "&remoteip=" . $_SERVER["REMOTE_ADDR"];
         $result = file_get_contents($url);
